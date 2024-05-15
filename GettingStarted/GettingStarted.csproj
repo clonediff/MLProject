@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MathNet.Numerics" Version="6.0.0-beta1" />
+      <PackageReference Include="SharpImg.System.Windows.Forms.Controls" Version="1.0.5001" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+      <PackageReference Include="System.Windows.Forms.DataVisualization" Version="1.0.0-prerelease.20110.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NumSharp\NumSharp.csproj" />
+    </ItemGroup>
+
+</Project>
