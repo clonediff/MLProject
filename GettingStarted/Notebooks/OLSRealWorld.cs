@@ -2,7 +2,7 @@ using NumSharp;
 
 namespace GettingStarted.Notebooks;
 
-public class Notebook3 : INotebook
+public class OLSRealWorld : INotebook
 {
     public async Task Execute()
     {

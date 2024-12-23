@@ -5,7 +5,7 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        INotebook notebook = new Notebook3();
+        INotebook notebook = new OLSRealWorld();
         await notebook.Execute();
     }
 }

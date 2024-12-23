@@ -2,7 +2,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GettingStarted.Notebooks;
 
-public class Notebook1 : INotebook
+public class LinearRegressionCostFunction : INotebook
 {
     public Task Execute()
     {

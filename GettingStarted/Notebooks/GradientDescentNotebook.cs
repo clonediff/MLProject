@@ -3,7 +3,7 @@ using NumSharp;
 
 namespace GettingStarted.Notebooks;
 
-public class Notebook2 : INotebook
+public class GradientDescentNotebook : INotebook
 {
     private void Plot(string fileName, ArrayWrapper x, ArrayWrapper y, double theta0, double theta1)
     {
