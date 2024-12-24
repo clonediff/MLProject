@@ -4,7 +4,7 @@ namespace NumSharp;
 
 public class Pandas
 {
-    public static async Task<DataType> ReadCsv(string filePath, params char[] separators)
+    public static async Task<DataFrame> ReadCsv(string filePath, params char[] separators)
     {
         Stream fileStream;
         if (!File.Exists(filePath))
@@ -23,7 +23,7 @@ public class Pandas
         var allLines = fileContents.Split('\n', StringSplitOptions.RemoveEmptyEntries)
             .Select(x => x.Split('\t', StringSplitOptions.RemoveEmptyEntries)).ToArray();
         
-        return new DataType
+        return new DataFrame
         {
             Header = allLines[0],
             Data = allLines.Skip(1).Select(x => x.Select(y => double.Parse(y, NumberFormatInfo.InvariantInfo)).ToArray()).ToArray()

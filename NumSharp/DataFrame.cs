@@ -4,19 +4,19 @@ using System.Text;
 
 namespace NumSharp;
 
-public class DataType
+public class DataFrame
 {
-    private static ImmutableDictionary<string, Func<DataType, Func<int, double>>> RowCalculators =
+    private static ImmutableDictionary<string, Func<DataFrame, Func<int, double>>> RowCalculators =
         ImmutableDictionary.CreateRange(new[]
         {
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("count", x => x.Count),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("mean", x => x.Mean),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("std", x => x.Std),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("min", x => x.Min),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("25%", x => x.Quartile1),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("50%", x => x.Median),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("75%", x => x.Quartile3),
-            new KeyValuePair<string, Func<DataType, Func<int, double>>>("max", x => x.Max)
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("count", x => x.Count),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("mean", x => x.Mean),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("std", x => x.Std),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("min", x => x.Min),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("25%", x => x.Quartile1),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("50%", x => x.Median),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("75%", x => x.Quartile3),
+            new KeyValuePair<string, Func<DataFrame, Func<int, double>>>("max", x => x.Max)
         });
     
     private string[] _header;
@@ -36,21 +36,19 @@ public class DataType
     public double[][] Data { get; init; }
     private string[]? Rows { get; init; }
 
-    public DataType this[params string[] keys]
-    {
-        get => new DataType()
+    public DataFrame this[params string[] keys] =>
+        new()
         {
             Header = keys,
             Data = Data.Select(x => keys.Select(key => x[_headerHelper[key]]).ToArray()).ToArray()
         };
-    }
 
     public override string ToString()
     {
         return GetTable(Rows ?? Enumerable.Range(0, Data.Length).Select(x => x.ToString()).ToArray());
     }
 
-    public DataType Describe(params string[] rows)
+    public DataFrame Describe(params string[] rows)
     {
         if (rows.Length == 0)
             rows = new[] { "count", "mean", "std", "min", "25%", "50%", "75%", "max" };
@@ -64,7 +62,7 @@ public class DataType
                 res[i][j] = RowCalculators[rows[i]](this)(j);
         }
 
-        return new DataType
+        return new DataFrame
         {
             Header = _header,
             Data = res,
